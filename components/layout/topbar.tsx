@@ -1,12 +1,33 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useRouter } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import { Search, Bell, MessageCircle, ChevronDown, User, Settings, LogOut, Command } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { supabase } from "@/lib/supabase"
 
 export function Topbar() {
   const [isProfileOpen, setIsProfileOpen] = useState(false)
+  const router = useRouter()
+  const [userName, setUserName] = useState("Usuario")
+  const [userEmail, setUserEmail] = useState("")
+
+  useEffect(() => {
+    const getUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser()
+      if (user) {
+        setUserName(user.email?.split("@")[0] || "Usuario")
+        setUserEmail(user.email || "")
+      }
+    }
+    getUser()
+  }, [])
+
+  const cerrarSesion = async () => {
+    await supabase.auth.signOut()
+    router.push("/login")
+  }
 
   return (
     <header className="bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl border-b border-slate-200/60 dark:border-slate-700 px-6 py-3 z-20">
@@ -39,10 +60,12 @@ export function Topbar() {
           <div className="relative">
             <button onClick={() => setIsProfileOpen(!isProfileOpen)} className="flex items-center gap-3 p-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
               <div className="text-right hidden sm:block">
-                <p className="text-sm font-semibold text-slate-800 dark:text-white leading-tight">Dra. Ana García</p>
-                <p className="text-xs text-slate-500 dark:text-slate-400">Medicina • 1er Sem</p>
+                <p className="text-sm font-semibold text-slate-800 dark:text-white leading-tight">{userName}</p>
+                <p className="text-xs text-slate-500 dark:text-slate-400">{userEmail}</p>
               </div>
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#7C4DFF] to-[#4D9FFF] flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-[#7C4DFF]/20">AG</div>
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#7C4DFF] to-[#4D9FFF] flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-[#7C4DFF]/20">
+                {userName?.slice(0,2).toUpperCase()}
+              </div>
               <ChevronDown className={cn("w-4 h-4 text-slate-400 dark:text-slate-500 transition-transform", isProfileOpen && "rotate-180")} />
             </button>
 
@@ -51,15 +74,15 @@ export function Topbar() {
                 <motion.div initial={{ opacity: 0, y: -8, scale: 0.96 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -8, scale: 0.96 }}
                   className="absolute right-0 mt-3 w-60 bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-200/60 dark:border-slate-700 py-2 backdrop-blur-xl">
                   <div className="px-4 py-3 border-b border-slate-100 dark:border-slate-700">
-                    <p className="text-sm font-semibold text-slate-800 dark:text-white">Dra. Ana García</p>
-                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">ana.garcia@medicina.edu</p>
+                    <p className="text-sm font-semibold text-slate-800 dark:text-white">{userName}</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">{userEmail}</p>
                   </div>
                   <div className="py-1">
-                    <button className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"><User className="w-4 h-4 text-slate-400" /> Mi Perfil</button>
-                    <button className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"><Settings className="w-4 h-4 text-slate-400" /> Configuración</button>
+                    <button onClick={() => router.push("/perfil")} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"><User className="w-4 h-4 text-slate-400" /> Mi Perfil</button>
+                    <button onClick={() => router.push("/configuracion")} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"><Settings className="w-4 h-4 text-slate-400" /> Configuración</button>
                   </div>
                   <div className="border-t border-slate-100 dark:border-slate-700 pt-1 mt-1">
-                    <button className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"><LogOut className="w-4 h-4" /> Cerrar Sesión</button>
+                    <button onClick={cerrarSesion} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"><LogOut className="w-4 h-4" /> Cerrar Sesión</button>
                   </div>
                 </motion.div>
               )}
