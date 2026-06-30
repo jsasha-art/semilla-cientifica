@@ -155,7 +155,7 @@ export default function Home() {
 
             {/* Stats Cards */}
 
-            <div className="grid grid-cols-3 gap-4 mt-8 relative z-10">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8 relative z-10">
 
               {stats.map((stat) => (
 
@@ -199,7 +199,7 @@ export default function Home() {
 
             </div>
 
-            <div className="grid grid-cols-6 gap-3">
+            <div className="grid grid-cols-3 sm:grid-cols-6 gap-3">
 
               {quickActions.map((item) => (
   <button 
@@ -243,7 +243,7 @@ export default function Home() {
 
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
               {courses.map((course) => (
 
@@ -325,7 +325,7 @@ export default function Home() {
 
             <h2 className="text-base font-bold text-slate-800 mb-3">📂 Recursos</h2>
 
-            <div className="grid grid-cols-6 gap-2">
+            <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
 
               {recursos.map((r) => (
 
