@@ -20,8 +20,19 @@ export default function PerfilPage() {
   })
 
   useEffect(() => {
+  const cargarPerfil = async () => {
+    const { data: { user } } = await supabase.auth.getUser()
+    if (user) {
+      setPerfil(prev => ({
+        ...prev,
+        nombre: user.email?.split("@")[0] || "Usuario",
+        email: user.email || "",
+      }))
+    }
     cargarDatos()
-  }, [])
+  }
+  cargarPerfil()
+}, [])
 
   const cargarDatos = async () => {
     const { data } = await supabase.from("protocols").select("*").eq("user_id", "test-user")
