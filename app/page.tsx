@@ -136,22 +136,20 @@ export default function Home() {
 
                   </button>
 
+                           </div>
                 </div>
 
-              </div>
-
-              <div className="w-48 h-48 bg-white/10 rounded-full flex items-center justify-center backdrop-blur-sm border border-white/10">
-  <svg viewBox="0 0 100 100" className="w-32 h-32">
-    <circle cx="50" cy="35" r="15" fill="white" opacity="0.9"/>
-    <rect x="35" y="50" width="30" height="35" rx="5" fill="white" opacity="0.9"/>
-    <rect x="28" y="45" width="44" height="8" rx="4" fill="#7C4DFF" opacity="0.5"/>
-    <rect x="60" y="55" width="20" height="14" rx="3" fill="#4D9FFF" opacity="0.7"/>
-    <circle cx="42" cy="32" r="2" fill="#1a0533"/>
-    <circle cx="52" cy="32" r="2" fill="#1a0533"/>
-    <path d="M44 38 Q47 42 50 38" stroke="#1a0533" strokeWidth="1.5" fill="none"/>
-  </svg>
-</div>
+          <div className="hidden lg:block relative">
+            <div className="w-48 h-48 relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-pink-400/40 via-violet-400/40 to-cyan-400/40 rounded-full blur-xl animate-pulse" />
+              <div className="absolute inset-4 bg-gradient-to-br from-pink-300/60 via-violet-300/60 to-cyan-300/60 rounded-full blur-md" style={{ animationDuration: "3s" }} />
+              <div className="absolute inset-0 flex items-center justify-center text-7xl animate-bounce" style={{ animationDuration: "4s" }}>🧠</div>
+              <div className="absolute top-0 left-1/2 w-3 h-3 bg-yellow-300 rounded-full animate-spin shadow-lg shadow-yellow-300/50" style={{ animationDuration: "3s", transformOrigin: "24px 96px" }} />
+              <div className="absolute top-0 left-1/2 w-2.5 h-2.5 bg-cyan-300 rounded-full animate-spin shadow-lg shadow-cyan-300/50" style={{ animationDuration: "5s", transformOrigin: "-24px 96px" }} />
+              <div className="absolute top-0 left-1/2 w-2 h-2 bg-pink-300 rounded-full animate-spin shadow-lg shadow-pink-300/50" style={{ animationDuration: "4s", transformOrigin: "0px 96px" }} />
             </div>
+          </div>
+        </div>
 
             {/* Stats Cards */}
 
