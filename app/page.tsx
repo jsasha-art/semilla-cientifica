@@ -1,3 +1,5 @@
+"use client"
+
 import { SidebarLeft } from "@/components/layout/sidebar-left"
 
 import { Topbar } from "@/components/layout/topbar"
@@ -233,7 +235,7 @@ export default function Home() {
 
               <h2 className="text-base font-bold text-slate-800">📚 Cursos Destacados</h2>
 
-              <button className="text-sm font-semibold text-[#7C4DFF] hover:text-[#6A3DE8] transition-colors flex items-center gap-1">
+              <button onClick={() => window.location.href = "/cursos"} className="text-sm font-semibold text-[#7C4DFF] hover:text-[#6A3DE8] transition-colors flex items-center gap-1">
 
                 Ver todos <ArrowRight className="w-4 h-4" />
 
@@ -245,7 +247,7 @@ export default function Home() {
 
               {courses.map((course) => (
 
-                <div key={course.title} className="bg-white rounded-2xl p-5 border border-slate-100 hover:shadow-lg transition-all duration-200 cursor-pointer shadow-sm group">
+                <div onClick={() => window.location.href = "/cursos"} key={course.title} className="bg-white rounded-2xl p-5 border border-slate-100 hover:shadow-lg transition-all duration-200 cursor-pointer shadow-sm group">
 
                   <div className="flex gap-3 mb-4">
 
@@ -327,7 +329,7 @@ export default function Home() {
 
               {recursos.map((r) => (
 
-                <div key={r.label} className="bg-white border border-slate-100 rounded-xl p-3 text-center hover:border-[#7C4DFF]/30 hover:bg-violet-50/30 hover:shadow-md transition-all cursor-pointer group">
+                <div onClick={() => window.location.href = "/recursos"} key={r.label} className="bg-white border border-slate-100 rounded-xl p-3 text-center hover:border-[#7C4DFF]/30 hover:bg-violet-50/30 hover:shadow-md transition-all cursor-pointer group">
 
                   <span className="text-xl group-hover:scale-110 transition-transform inline-block">{r.icon}</span>
 
