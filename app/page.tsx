@@ -122,13 +122,13 @@ export default function Home() {
 
                 <div className="flex gap-3 mt-5">
 
-                  <button className="bg-white text-[#7C4DFF] font-semibold px-5 py-2.5 rounded-xl text-sm hover:bg-white/90 transition-all flex items-center gap-2">
+                  <button  onClick={() => window.location.href = "/cursos"} className="bg-white text-[#7C4DFF] font-semibold px-5 py-2.5 rounded-xl text-sm hover:bg-white/90 transition-all flex items-center gap-2">
 
                     <Play className="w-4 h-4" /> Comenzar Ahora
 
                   </button>
 
-                  <button className="bg-white/15 text-white font-semibold px-5 py-2.5 rounded-xl text-sm hover:bg-white/25 transition-all backdrop-blur-sm">
+                  <button onClick={() => window.location.href = "/cursos"} className="bg-white/15 text-white font-semibold px-5 py-2.5 rounded-xl text-sm hover:bg-white/25 transition-all backdrop-blur-sm">
 
                     Ver Cursos
 
@@ -200,20 +200,24 @@ export default function Home() {
             <div className="grid grid-cols-6 gap-3">
 
               {quickActions.map((item) => (
-
-                <button key={item.label} className="bg-white rounded-2xl p-4 border border-slate-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-200 text-center shadow-sm group">
-
-                  <div className={`w-11 h-11 ${item.bg} rounded-xl flex items-center justify-center mx-auto mb-2.5 group-hover:scale-110 transition-transform`}>
-
-                    <item.icon className={`w-5 h-5 ${item.col}`} />
-
-                  </div>
-
-                  <span className="text-xs font-semibold text-slate-600">{item.label}</span>
-
-                </button>
-
-              ))}
+  <button 
+    key={item.label} 
+    onClick={() => {
+      if (item.label === "Nueva Idea") window.location.href = "/laboratorio"
+      else if (item.label === "Crear Protocolo") window.location.href = "/protocolos"
+      else if (item.label === "Buscar Mentor") window.location.href = "/mentorias"
+      else if (item.label === "Eventos") window.location.href = "/eventos"
+      else if (item.label === "Mis Logros") window.location.href = "/logros"
+      else if (item.label === "Continuar Curso") window.location.href = "/cursos"
+    }}
+    className="bg-white rounded-2xl p-4 border border-slate-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-200 text-center shadow-sm group cursor-pointer"
+  >
+    <div className={`w-11 h-11 ${item.bg} rounded-xl flex items-center justify-center mx-auto mb-2.5 group-hover:scale-110 transition-transform`}>
+      <item.icon className={`w-5 h-5 ${item.col}`} />
+    </div>
+    <span className="text-xs font-semibold text-slate-600">{item.label}</span>
+  </button>
+))}
 
             </div>
 
