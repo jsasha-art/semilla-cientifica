@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  role      String   @default("student")
+  avatar    String?
+  xp        Int      @default(0)
+  level     Int      @default(1)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Course {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  level       String
+  duration    String
+  modules     Int
+  rating      Float
+  students    Int
+  free        Boolean  @default(true)
+  progress    Int      @default(0)
+  createdAt   DateTime @default(now())
+}
+
+model Protocol {
+  id        String   @id @default(cuid())
+  userId    String
+  title     String
+  status    String   @default("draft")
+  progress  Int      @default(0)
+  content   Json?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Resource {
+  id        String   @id @default(cuid())
+  title     String
+  category  String
+  url       String?
+  createdAt DateTime @default(now())
+}
